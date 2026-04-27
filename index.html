@@ -16,7 +16,7 @@
       --bg2:        oklch(0.13 0.015 240);
       --border:     oklch(0.22 0.015 240);
       --muted:      oklch(0.42 0.01 240);
-      --text:       oklch(0.88 0.01 240);
+      --text:       oklch(0.95 0.01 240);
       --text-dim:   oklch(0.60 0.01 240);
       --accent:     oklch(0.72 0.17 55);
       --accent-dim: oklch(0.72 0.17 55 / 0.12);
@@ -30,7 +30,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.7;
       min-height: 100vh;
       background-image:
@@ -116,7 +116,7 @@
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 2.2rem;
-      transition: color 0.6s ease;
+      transition: color 0.8s ease;
     }
 
     .section-label.lit {
@@ -361,7 +361,7 @@
       <div class="section-label">// über mich</div>
       <div class="about-text">
         <p>
-          Mein Weg in die IT war alles andere als geplant. Jahre als <strong>Werkzeugmechaniker</strong>, Betriebsrat, Gaststätte nebenbei – dann hat Corona alles durcheinandergeworfen. In der entstandenen Pause hab ich angefangen mich mit IT zu beschäftigen, und gemerkt dass mich das mehr packt als alles davor.
+          Acht Jahre lang war ich in der Werkzeugmechanik zu Hause, bis ich während der Corona-Zeit die IT für mich entdeckt habe. Was als Beschäftigung in einer Umbruchphase begann, wurde schnell zur bewussten Entscheidung für einen Branchenwechsel, weil mich die technischen Herausforderungen dort einfach mehr begeistern.
         </p>
         <p>
           Jetzt mache ich meine Umschulung zum <strong>Fachinformatiker Systemintegration</strong>. Mein Interesse liegt auf dem was über den Lehrplan hinausgeht: <strong>Homelab, Linux, Security</strong> – und seit einer Weile auch KI-Workflows. Wie man Sprachmodelle sinnvoll in eigene Prozesse einbettet, interessiert mich genauso wie die klassische Infrastruktur darunter.
@@ -480,12 +480,9 @@
     // Section-Label Glow bei Scroll
     const labelObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('lit');
-          setTimeout(() => e.target.classList.remove('lit'), 1200);
-        }
+        e.target.classList.toggle('lit', e.isIntersecting);
       });
-    }, { threshold: 0.8 });
+    }, { threshold: 0.5 });
     document.querySelectorAll('.section-label').forEach(el => labelObs.observe(el));
 
     // E-Mail kopieren
