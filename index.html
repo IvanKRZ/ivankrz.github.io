@@ -55,8 +55,13 @@
 
     /* ── Header ── */
     header {
+      min-height: 100vh;
       padding: 6rem 0 4rem;
       border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
     }
 
     .badge {
@@ -100,7 +105,8 @@
       color: var(--text-dim);
       line-height: 1.5;
       margin-bottom: 1.6rem;
-      min-height: 1.8em;
+      min-height: 4em;
+      white-space: nowrap;
     }
 
     .hero-hook .word {
@@ -386,9 +392,9 @@
     </header>
 
     <!-- ── About ── -->
-<section class="reveal">
+<section>
       <div class="section-label">// über mich</div>
-      <div class="about-text">
+      <div class="about-text reveal">
         <p>
           Acht Jahre <strong>Werkzeugmechanik</strong> haben mich gelehrt, wie man Probleme wirklich löst – nicht schnell, sondern richtig. <strong>Präzision, Fehleranalyse, methodisches Denken</strong>. Das Handwerk war ein gutes Fundament. Irgendwann war das Kapitel trotzdem vorbei.
         </p>
@@ -420,9 +426,9 @@
     </section>
 
     <!-- ── Portfolio ── -->
-    <section class="reveal">
+    <section>
       <div class="section-label">// portfolio</div>
-      <div class="projects">
+      <div class="projects reveal">
         <a href="https://github.com/IvanKRZ/homelab-scripts" target="_blank" rel="noopener noreferrer" class="project">
           <div>
             <div class="project-name">homelab-scripts</div>
