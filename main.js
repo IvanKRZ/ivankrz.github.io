@@ -44,6 +44,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   setTimeout(type, 900);
 
+  /* ── Hero parallax fade on scroll ── */
+  const heroInner = document.querySelector('.hero-inner');
+  const scrollHint = document.getElementById('scrollHint');
+  const headerHeight = () => document.querySelector('header').offsetHeight;
+  let ticking = false;
+
+  function updateHero() {
+    const y = window.scrollY;
+    const h = headerHeight();
+    const progress = Math.min(y / (h * 0.5), 1);
+    const opacity  = 1 - progress * progress;
+    if (heroInner) heroInner.style.opacity = opacity;
+    if (scrollHint) scrollHint.classList.toggle('hidden', y > 60);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateHero);
+      ticking = true;
+    }
+  }, { passive: true });
+
   /* ── Scroll Reveal ── */
   const revealObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
