@@ -1,0 +1,359 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          oklch(0.12 0.015 240);
+  --bg2:         oklch(0.15 0.015 240);
+  --bg3:         oklch(0.19 0.018 240);
+  --border:      oklch(0.22 0.015 240);
+  --border-hi:   oklch(0.32 0.015 240);
+  --muted:       oklch(0.45 0.01 240);
+  --text:        oklch(0.96 0.008 240);
+  --text-dim:    oklch(0.75 0.01 240);
+  --text-muted:  oklch(0.62 0.01 240);
+  --accent:      oklch(0.72 0.17 55);
+  --accent-dim:  oklch(0.72 0.17 55 / 0.14);
+  --accent-glow: oklch(0.72 0.17 55 / 0.22);
+  --green:       oklch(0.72 0.17 145);
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'Space Grotesk', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.75;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 100% 60% at 50% -2%, oklch(0.72 0.17 55 / 0.18) 0%, transparent 65%),
+    radial-gradient(oklch(0.88 0.01 240 / 0.22) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+}
+
+::selection { background: var(--accent); color: var(--bg); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout ── */
+.container { max-width: 780px; margin: 0 auto; padding: 0 2.5rem; }
+
+/* ── Header ── */
+header {
+  min-height: 100vh;
+  padding: 6rem 0 4rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.badge-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  animation: pulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+h1 {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  white-space: nowrap;
+}
+
+/* ── Typewriter Hero ── */
+.hero-hook {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 400;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 1.6rem;
+  min-height: 4em;
+  white-space: nowrap;
+}
+
+.hero-hook .word {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.hero-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--accent);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.tagline {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  max-width: 520px;
+  line-height: 1.65;
+  font-family: var(--mono);
+  letter-spacing: 0.01em;
+}
+
+/* ── Sections ── */
+section {
+  padding: 4rem 0 6rem;
+  border-bottom: 1px solid var(--border);
+}
+section:last-of-type { border-bottom: none; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2.8rem;
+  transition: color 0.7s ease;
+}
+.section-label.lit { color: var(--accent); }
+
+/* ── About ── */
+.about-text {
+  font-size: 1.06rem;
+  color: var(--text-dim);
+  line-height: 1.85;
+}
+.about-text p + p { margin-top: 1.4em; }
+.about-text strong { color: var(--text); font-weight: 600; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.32rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  background: var(--bg2);
+  letter-spacing: 0.04em;
+  cursor: default;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: tagIn 0.35s ease forwards;
+}
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-2px);
+}
+@keyframes tagIn { to { opacity: 1; transform: translateY(0); } }
+
+/* ── Portfolio ── */
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.project {
+  background: var(--bg2);
+  padding: 1.8rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 1.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    box-shadow 0.25s,
+    transform 0.2s;
+}
+
+.project::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  opacity: 0;
+  background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 60%);
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.project:hover, .project:focus {
+  border-color: oklch(0.72 0.17 55 / 0.5);
+  background: var(--bg3);
+  box-shadow: 0 0 0 1px oklch(0.72 0.17 55 / 0.15), 0 8px 32px oklch(0.72 0.17 55 / 0.08);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.project:hover::before { opacity: 1; }
+
+.project:hover .project-arrow {
+  transform: translate(4px, -4px);
+  color: var(--accent);
+}
+
+.project:hover .project-name { color: var(--accent); }
+
+.project-name {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.55rem;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.project-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+.stack-chip {
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+.project-arrow {
+  font-size: 1.1rem;
+  color: var(--muted);
+  transition: transform 0.2s, color 0.2s;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Fade-in ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in   { animation: fadeUp 0.6s ease both; }
+.fade-in-1 { animation-delay: 0.05s; }
+.fade-in-2 { animation-delay: 0.18s; }
+.fade-in-3 { animation-delay: 0.30s; }
+.fade-in-4 { animation-delay: 0.42s; }
+
+/* ── Footer ── */
+footer {
+  padding: 2.5rem 0;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-links { display: flex; align-items: center; gap: 1.5rem; }
+
+.footer-links > a, .copy-email-btn {
+  color: var(--muted);
+  transition: color 0.18s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+}
+.footer-links > a:hover, .copy-email-btn:hover {
+  color: var(--accent);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.copy-toast {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.6rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: toastIn 0.2s ease;
+}
+@keyframes toastIn {
+  from { opacity:0; transform:translateX(-50%) translateY(4px); }
+  to   { opacity:1; transform:translateX(-50%) translateY(0); }
+}
+
+@media (max-width: 580px) {
+  .container { padding: 0 1.25rem; }
+  header { padding: 3.5rem 0 3rem; }
+  .project { grid-template-columns: 1fr; padding: 1.4rem 1.4rem; }
+  .project-arrow { display: none; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
