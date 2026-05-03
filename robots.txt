@@ -1,0 +1,11 @@
+# Hello, fellow human reading robots.txt.
+# That's how I know you're one of us.
+#
+# If you're a recruiter, hiring manager, or fellow nerd
+# who got here by curiosity rather than crawler-script:
+# mail me at Ivan_KB@web.de — I'd like to hear from you.
+#
+# If you're a crawler: carry on, nothing fancy here.
+
+User-agent: *
+Allow: /

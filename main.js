@@ -1,3 +1,18 @@
+/* ── Console-Greeting für neugierige DevTools-Besucher ── */
+(() => {
+  const title = 'color: #7dd3fc; font: 600 14px "IBM Plex Mono", monospace;';
+  const dim   = 'color: #94a3b8; font: 400 12px "IBM Plex Mono", monospace;';
+  const hl    = 'color: #fbbf24; font: 500 12px "IBM Plex Mono", monospace;';
+
+  console.log('%c> ivankrz.github.io', title);
+  console.log(
+    '%c> uptime:%c ∞   %crecruiters:%c welcome   %ccurious devs:%c extra welcome',
+    dim, hl, dim, hl, dim, hl
+  );
+  console.log('%c> tip: curl -s ivankrz.github.io/robots.txt', dim);
+  console.log('%c> mail: Ivan_KB@web.de', dim);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   /* ── Typewriter ── */
   const PHRASES = [
