@@ -455,9 +455,11 @@ section {
   border-radius: 3px;
   font-family: var(--mono);
   font-size: 0.7rem;
+  line-height: 1;
   letter-spacing: 0.04em;
   cursor: pointer;
   padding: 0.4rem 0.85rem;
+  box-sizing: border-box;
   position: relative;
   transition: color 0.18s, border-color 0.18s, background 0.18s, transform 0.15s;
 }
@@ -498,7 +500,7 @@ footer {
 
 .footer-links { display: flex; align-items: center; gap: 1.5rem; }
 
-.footer-links > a, .copy-email-btn {
+.footer-links > a, .footer-links .copy-email-btn {
   color: var(--muted);
   transition: color 0.18s, transform 0.15s;
   display: flex;
@@ -513,7 +515,7 @@ footer {
   position: relative;
   text-decoration: none;
 }
-.footer-links > a:hover, .copy-email-btn:hover {
+.footer-links > a:hover, .footer-links .copy-email-btn:hover {
   color: var(--accent);
   text-decoration: none;
   transform: translateY(-1px);
@@ -544,6 +546,10 @@ footer {
   .project { grid-template-columns: 1fr; padding: 1.4rem 1.4rem; }
   .project-arrow { display: none; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
+  .hero-links { flex-wrap: nowrap; gap: 0.5rem; }
+  .hero-links-sep { display: none; }
+  .hero-links a,
+  .hero-links .copy-email-btn { white-space: nowrap; padding: 0.4rem 0.6rem; }
 }
 
 @media (max-width: 420px) {
