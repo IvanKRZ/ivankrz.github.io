@@ -1,8 +1,8 @@
 /* ── Console-Greeting für neugierige DevTools-Besucher ── */
 (() => {
-  const title = 'color: #7dd3fc; font: 600 14px "IBM Plex Mono", monospace;';
-  const dim   = 'color: #94a3b8; font: 400 12px "IBM Plex Mono", monospace;';
-  const hl    = 'color: #fbbf24; font: 500 12px "IBM Plex Mono", monospace;';
+  const title = 'color: #ff8a3d; font: 600 14px "IBM Plex Mono", monospace;';
+  const dim   = 'color: #8b919c; font: 400 12px "IBM Plex Mono", monospace;';
+  const hl    = 'color: #ff8a3d; font: 500 12px "IBM Plex Mono", monospace;';
 
   console.log('%c> ivankrz.github.io', title);
   console.log(
@@ -14,6 +14,8 @@
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ── Typewriter ── */
   const PHRASES = [
     { prefix: 'Werkzeugmacher → Fachinformatiker,', highlight: 'von der Werkstatt zum Homelab.' },
@@ -22,53 +24,66 @@ document.addEventListener('DOMContentLoaded', () => {
     { prefix: 'Taucher, Gamer,', highlight: 'Nerd.' },
   ];
 
-  let phraseIdx = 0, charIdx = 0, deleting = false;
   const textEl = document.getElementById('heroText');
+  const cursorEl = document.getElementById('heroCursor');
   if (!textEl) return;
 
-  function type() {
-    const { prefix, highlight } = PHRASES[phraseIdx];
-    const full = prefix + ' ' + highlight;
-    const pLen = prefix.length + 1;
+  if (reduceMotion) {
+    /* Show first phrase statically — no animation, no cursor blink */
+    const { prefix, highlight } = PHRASES[0];
+    textEl.innerHTML = prefix + ' <span class="word">' + highlight + '</span>';
+    if (cursorEl) cursorEl.style.display = 'none';
+  } else {
+    let phraseIdx = 0, charIdx = 0, deleting = false;
 
-    if (!deleting) {
-      charIdx = Math.min(charIdx + 1, full.length);
-      const shown = full.slice(0, charIdx);
-      textEl.innerHTML = charIdx <= pLen
-        ? shown
-        : prefix + ' <span class="word">' + shown.slice(pLen) + '</span>';
-      if (charIdx === full.length) {
-        setTimeout(() => { deleting = true; type(); }, 2400);
-        return;
+    function type() {
+      const { prefix, highlight } = PHRASES[phraseIdx];
+      const full = prefix + ' ' + highlight;
+      const pLen = prefix.length + 1;
+
+      if (!deleting) {
+        charIdx = Math.min(charIdx + 1, full.length);
+        const shown = full.slice(0, charIdx);
+        textEl.innerHTML = charIdx <= pLen
+          ? shown
+          : prefix + ' <span class="word">' + shown.slice(pLen) + '</span>';
+        if (charIdx === full.length) {
+          setTimeout(() => { deleting = true; type(); }, 2400);
+          return;
+        }
+        setTimeout(type, 44);
+      } else {
+        charIdx = Math.max(charIdx - 1, 0);
+        const shown = full.slice(0, charIdx);
+        textEl.innerHTML = charIdx <= pLen
+          ? shown
+          : prefix + ' <span class="word">' + shown.slice(pLen) + '</span>';
+        if (charIdx === 0) {
+          deleting = false;
+          phraseIdx = (phraseIdx + 1) % PHRASES.length;
+          setTimeout(type, 480);
+          return;
+        }
+        setTimeout(type, 20);
       }
-      setTimeout(type, 44);
-    } else {
-      charIdx = Math.max(charIdx - 1, 0);
-      const shown = full.slice(0, charIdx);
-      textEl.innerHTML = charIdx <= pLen
-        ? shown
-        : prefix + ' <span class="word">' + shown.slice(pLen) + '</span>';
-      if (charIdx === 0) {
-        deleting = false;
-        phraseIdx = (phraseIdx + 1) % PHRASES.length;
-        setTimeout(type, 480);
-        return;
-      }
-      setTimeout(type, 20);
     }
+    setTimeout(type, 900);
   }
-  setTimeout(type, 900);
 
   /* ── Hero parallax fade on scroll ── */
   const heroInner = document.querySelector('.hero-inner');
   const scrollHint = document.getElementById('scrollHint');
-  const headerHeight = () => document.querySelector('header').offsetHeight;
+  const headerEl = document.querySelector('header');
+  let cachedHeaderHeight = headerEl ? headerEl.offsetHeight : 0;
+  window.addEventListener('resize', () => {
+    if (headerEl) cachedHeaderHeight = headerEl.offsetHeight;
+  }, { passive: true });
+
   let ticking = false;
 
   function updateHero() {
     const y = window.scrollY;
-    const h = headerHeight();
-    const progress = Math.min(y / (h * 0.5), 1);
+    const progress = Math.min(y / (cachedHeaderHeight * 0.5), 1);
     const opacity  = 1 - progress * progress;
     if (heroInner) heroInner.style.opacity = opacity;
     if (scrollHint) scrollHint.classList.toggle('hidden', y > 60);
@@ -102,21 +117,23 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Email kopieren ── */
   const emailBtn = document.getElementById('emailBtn');
   if (emailBtn) {
-    emailBtn.addEventListener('click', function () {
+    const showToast = (message) => {
+      if (emailBtn.querySelector('.copy-toast')) return;
+      const toast = document.createElement('span');
+      toast.className = 'copy-toast';
+      toast.textContent = message;
+      emailBtn.appendChild(toast);
+      setTimeout(() => toast.remove(), 2400);
+    };
+
+    emailBtn.addEventListener('click', () => {
       const email = 'Ivan_KB@web.de';
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email).then(() => {
-          if (this.querySelector('.copy-toast')) return;
-          const toast = document.createElement('span');
-          toast.className = 'copy-toast';
-          toast.textContent = 'Kopiert!';
-          this.appendChild(toast);
-          setTimeout(() => toast.remove(), 2000);
-        }).catch(() => {
-          alert('E-Mail: ' + email);
-        });
+        navigator.clipboard.writeText(email)
+          .then(() => showToast('Kopiert!'))
+          .catch(() => showToast('Manuell kopieren: ' + email));
       } else {
-        alert('E-Mail: ' + email);
+        showToast('Manuell kopieren: ' + email);
       }
     });
   }
