@@ -461,27 +461,16 @@ section {
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* Staggered children reveal */
-.reveal-children > * {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal-children.visible > *:nth-child(1) { transition-delay: 0s; }
-.reveal-children.visible > *:nth-child(2) { transition-delay: 0.08s; }
-.reveal-children.visible > *:nth-child(3) { transition-delay: 0.16s; }
-.reveal-children.visible > * { opacity: 1; transform: translateY(0); }
+/* Anime.js animiert diese Elemente — Initial-State verhindert Flash beim Laden */
+.hero-anim { opacity: 0; }
+.reveal-children > .project { opacity: 0; }
+.skill-group .skill-tag { opacity: 0; }
 
-/* ── Fade-in ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .hero-anim,
+  .reveal-children > .project,
+  .skill-group .skill-tag { opacity: 1; }
 }
-.fade-in   { animation: fadeUp 0.6s ease both; }
-.fade-in-1 { animation-delay: 0.05s; }
-.fade-in-2 { animation-delay: 0.18s; }
-.fade-in-3 { animation-delay: 0.30s; }
-.fade-in-4 { animation-delay: 0.42s; }
 
 /* ── Hero links ── */
 .hero-links {

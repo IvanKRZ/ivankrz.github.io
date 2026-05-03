@@ -1,3 +1,5 @@
+import { animate, createTimeline, stagger } from 'https://cdn.jsdelivr.net/npm/animejs@4.3.0/+esm';
+
 /* ── Console-Greeting für neugierige DevTools-Besucher ── */
 (() => {
   const title = 'color: #ff8a3d; font: 600 14px "IBM Plex Mono", monospace;';
@@ -13,7 +15,24 @@
   console.log('%c> mail: Ivan_KB@web.de', dim);
 })();
 
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.addEventListener('DOMContentLoaded', () => {
+  /* ── Hero-Intro: badge → h1 → hook → links ── */
+  const heroTargets = document.querySelectorAll('.hero-anim');
+  if (heroTargets.length) {
+    if (reduceMotion) {
+      heroTargets.forEach(el => { el.style.opacity = '1'; });
+    } else {
+      createTimeline({ defaults: { ease: 'outExpo', duration: 700 } })
+        .add('.hero-anim', {
+          opacity: [0, 1],
+          translateY: [18, 0],
+          delay: stagger(120, { start: 100 }),
+        });
+    }
+  }
+
   /* ── Typewriter ── */
   const PHRASES = [
     { prefix: 'Werkzeugmacher → Fachinformatiker,', highlight: 'von der Werkstatt zum Homelab.' },
@@ -93,13 +112,51 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Scroll Reveal ── */
   const revealObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObs.unobserve(e.target);
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      el.classList.add('visible');
+      revealObs.unobserve(el);
+
+      if (reduceMotion) {
+        el.querySelectorAll('.project, .skill-tag').forEach(c => { c.style.opacity = '1'; });
+        return;
+      }
+
+      if (el.classList.contains('reveal-children')) {
+        animate(el.querySelectorAll('.project'), {
+          opacity: [0, 1],
+          translateY: [40, 0],
+          duration: 700,
+          ease: 'outExpo',
+          delay: stagger(80),
+        });
       }
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── Skill-Tags: pro Gruppe gestaggert beim Sichtbarwerden ── */
+  const skillObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const tags = e.target.querySelectorAll('.skill-tag');
+      skillObs.unobserve(e.target);
+
+      if (reduceMotion) {
+        tags.forEach(t => { t.style.opacity = '1'; });
+        return;
+      }
+
+      animate(tags, {
+        opacity: [0, 1],
+        scale: [0.85, 1],
+        duration: 500,
+        ease: 'outBack',
+        delay: stagger(30),
+      });
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-group').forEach(el => skillObs.observe(el));
 
   /* ── Section Label Glow ── */
   const labelObs = new IntersectionObserver(entries => {
