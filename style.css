@@ -43,6 +43,7 @@ body::before {
     radial-gradient(ellipse 100% 60% at 50% -2%, oklch(0.72 0.17 55 / 0.18) 0%, transparent 65%),
     radial-gradient(oklch(0.88 0.01 240 / 0.22) 1px, transparent 1px);
   background-size: 100% 100%, 28px 28px;
+  background-position: center center, center center;
   pointer-events: none;
 }
 
