@@ -171,6 +171,10 @@ h1 {
 
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor { animation: none; }
+}
+
 .tagline {
   font-size: 0.95rem;
   color: var(--text-muted);
