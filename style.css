@@ -358,7 +358,7 @@ section {
 /* ── Scroll indicator ── */
 .scroll-hint {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -375,7 +375,7 @@ section {
   width: 1px;
   height: 52px;
   background: linear-gradient(to bottom, transparent, var(--accent));
-  animation: scrollLine 1.8s ease-in-out infinite;
+  animation: scrollLine 2.5s ease-in-out infinite;
 }
 .scroll-hint-dot {
   width: 7px;
@@ -383,7 +383,7 @@ section {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 10px var(--accent);
-  animation: scrollDot 1.8s ease-in-out infinite;
+  animation: scrollDot 2.5s ease-in-out infinite;
 }
 @keyframes scrollLine {
   0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
