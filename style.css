@@ -56,7 +56,6 @@ a:hover { text-decoration: underline; }
 header {
   min-height: 100vh;
   padding: 6rem 0 4rem;
-  border-bottom: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -140,9 +139,7 @@ h1 {
 /* ── Sections ── */
 section {
   padding: 4rem 0 6rem;
-  border-bottom: 1px solid var(--border);
 }
-section:last-of-type { border-bottom: none; }
 
 .section-label {
   font-family: var(--mono);
@@ -286,6 +283,74 @@ section:last-of-type { border-bottom: none; }
   flex-shrink: 0;
 }
 
+/* ── Skills ── */
+.skill-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem 3rem;
+}
+
+@media (max-width: 580px) {
+  .skill-groups { grid-template-columns: 1fr; }
+}
+
+.skill-group-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.6;
+  margin-bottom: 0.85rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 0.38rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+  background: var(--bg2);
+  letter-spacing: 0.04em;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    box-shadow 0.25s,
+    transform 0.2s,
+    color 0.2s;
+}
+
+.skill-tag::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  opacity: 0;
+  background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 60%);
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.skill-tag:hover {
+  border-color: oklch(0.72 0.17 55 / 0.5);
+  background: var(--bg3);
+  box-shadow: 0 0 0 1px oklch(0.72 0.17 55 / 0.15), 0 8px 32px oklch(0.72 0.17 55 / 0.08);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.skill-tag:hover::before { opacity: 1; }
+
 /* ── Scroll indicator ── */
 .scroll-hint {
   position: absolute;
@@ -421,7 +486,6 @@ footer {
   font-family: var(--mono);
   font-size: 0.7rem;
   color: var(--muted);
-  border-top: 1px solid var(--border);
 }
 
 .footer-inner {
