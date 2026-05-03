@@ -279,14 +279,14 @@ section {
 }
 
 .project:hover, .project:focus {
-  border-color: oklch(0.72 0.17 55 / 0.5);
+  border-color: oklch(0.72 0.17 55 / 0.35);
   background: var(--bg3);
-  box-shadow: 0 0 0 1px oklch(0.72 0.17 55 / 0.15), 0 8px 32px oklch(0.72 0.17 55 / 0.08);
+  box-shadow: 0 0 0 1px oklch(0.72 0.17 55 / 0.08), 0 6px 24px oklch(0.72 0.17 55 / 0.04);
   transform: translateY(-2px);
   text-decoration: none;
 }
 
-.project:hover::before { opacity: 1; }
+.project:hover::before { opacity: 0.6; }
 
 .project:hover .project-arrow {
   transform: translate(4px, -4px);
