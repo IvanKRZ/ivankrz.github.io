@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Typewriter ── */
   const PHRASES = [
     { prefix: 'Werkzeugmacher → Fachinformatiker,', highlight: 'von der Werkstatt zum Homelab.' },
-    { prefix: 'Proxmox, Docker, Tailscale,', highlight: 'Infrastruktur im Eigenbau.' },
+    { prefix: 'Proxmox, Nextcloud, Tailscale,', highlight: 'Infrastruktur im Eigenbau.' },
     { prefix: 'Local LLMs, Claude Code,', highlight: 'KI-Workflows, die ich selbst baue.' },
     { prefix: 'Taucher, Gamer,', highlight: 'Nerd.' },
   ];
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { deleting = true; type(); }, 2400);
         return;
       }
-      setTimeout(type, 44);
+      setTimeout(type, 60);
     } else {
       charIdx = Math.max(charIdx - 1, 0);
       const shown = full.slice(0, charIdx);
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(type, 480);
         return;
       }
-      setTimeout(type, 20);
+      setTimeout(type, 35);
     }
   }
   setTimeout(type, 900);
