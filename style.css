@@ -17,6 +17,29 @@
   border: 0;
 }
 
+/* Skip-Link — versteckt, bis er per Tastatur fokussiert wird */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  z-index: 10;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0 0 6px 6px;
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+.skip-link:focus {
+  transform: translate(-50%, 0);
+  outline: none;
+}
+#main:focus { outline: none; }
+
 :root {
   /* Hex fallbacks for browsers without oklch() support (Safari <15.4, Firefox <113) */
   --bg:          #0e141c;
@@ -24,7 +47,7 @@
   --bg3:         #1a232f;
   --border:      #20293613;
   --border-hi:   #36404e;
-  --muted:       #5e6773;
+  --muted:       #7d8691;
   --text:        #f1f3f6;
   --text-dim:    #b8bdc6;
   --text-muted:  #8b919c;
@@ -43,7 +66,7 @@
     --bg3:         oklch(0.19 0.018 240);
     --border:      oklch(0.22 0.015 240);
     --border-hi:   oklch(0.32 0.015 240);
-    --muted:       oklch(0.45 0.01 240);
+    --muted:       oklch(0.58 0.012 240);
     --text:        oklch(0.96 0.008 240);
     --text-dim:    oklch(0.75 0.01 240);
     --text-muted:  oklch(0.62 0.01 240);
@@ -106,6 +129,31 @@ header {
   justify-content: center;
   text-align: center;
   position: relative;
+}
+
+/* Logo — oben im Header, etwa auf halber Höhe zwischen
+   Seitenanfang und dem mittig zentrierten Hero-Inhalt */
+.hero-logo {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(103px, 15.84vw, 173px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  animation: heroLogoIn 0.7s ease 0.1s forwards;
+}
+@keyframes heroLogoIn { to { opacity: 0.4; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo { animation: none; opacity: 0.4; }
+}
+
+/* Bei niedrigen Viewports (Logo würde mit dem Hero kollidieren) ausblenden */
+@media (max-height: 640px) {
+  .hero-logo { display: none; }
 }
 
 .badge {
@@ -175,16 +223,6 @@ h1 {
   .hero-cursor { animation: none; }
 }
 
-.tagline {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  font-weight: 400;
-  max-width: 520px;
-  line-height: 1.65;
-  font-family: var(--mono);
-  letter-spacing: 0.01em;
-}
-
 /* ── Sections ── */
 section {
   padding: 4rem 0 6rem;
@@ -209,36 +247,6 @@ section {
 }
 .about-text p + p { margin-top: 1.4em; }
 .about-text strong { color: var(--text); font-weight: 600; }
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 2.5rem;
-}
-
-.tag {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  padding: 0.32rem 0.8rem;
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  color: var(--text-dim);
-  background: var(--bg2);
-  letter-spacing: 0.04em;
-  cursor: default;
-  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
-  opacity: 0;
-  transform: translateY(8px);
-  animation: tagIn 0.35s ease forwards;
-}
-.tag:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-dim);
-  transform: translateY(-2px);
-}
-@keyframes tagIn { to { opacity: 1; transform: translateY(0); } }
 
 /* ── Portfolio ── */
 .projects {
@@ -535,29 +543,6 @@ footer {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-}
-
-.footer-links { display: flex; align-items: center; gap: 1.5rem; }
-
-.footer-links > a, .footer-links .copy-email-btn {
-  color: var(--muted);
-  transition: color 0.18s, transform 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: none;
-  border: none;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  cursor: pointer;
-  padding: 0;
-  position: relative;
-  text-decoration: none;
-}
-.footer-links > a:hover, .footer-links .copy-email-btn:hover {
-  color: var(--accent);
-  text-decoration: none;
-  transform: translateY(-1px);
 }
 
 .copy-toast {

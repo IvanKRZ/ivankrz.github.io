@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -)",
+      "Read(//c/Users/Ivan/Nextcloud/Design System/Logo/**)",
+      "Bash(powershell -Command \"Get-ChildItem -Path 'C:\\\\Users\\\\Ivan\\\\Nextcloud\\\\Design System\\\\Logo' | Select-Object Name,Length\")",
+      "Bash(cp \"C:/Users/Ivan/Nextcloud/Design System/Logo/Logo Small.png\" \"assets/logo-small.png\")",
+      "Bash(cp \"C:/Users/Ivan/Nextcloud/Design System/Logo/Logo Big.png\" \"assets/logo-big.png\")",
+      "Bash(node -e ' *)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8765 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; \"Port 8765 freigegeben\")"
+    ]
+  }
+}

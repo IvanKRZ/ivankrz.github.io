@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio von Ivan Krznaric-Bertic, Fachinformatiker Systemintegration mit Fokus auf Homelab, Linux, Security und KI-Workflows.">
-  <meta name="keywords" content="Ivan Krznaric-Bertic, Fachinformatiker, Systemintegration, Homelab, Linux, Proxmox, Wazuh, Tailscale, KI-Workflows, Claude Code, Obsidian">
   <meta name="author" content="Ivan Krznaric-Bertic">
+  <link rel="canonical" href="https://ivankrz.github.io/">
   <meta name="copyright" content="© 2026 Ivan Krznaric-Bertic">
   <title>Ivan Krznaric-Bertic | Fachinformatiker Systemintegration</title>
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ivankrz.github.io">
+  <meta property="og:url" content="https://ivankrz.github.io/">
   <meta property="og:title" content="Ivan Krznaric-Bertic | Fachinformatiker Systemintegration">
   <meta property="og:description" content="Portfolio von Ivan Krznaric-Bertic — Homelab, Linux, Security und KI-Workflows. Vom Werkzeugmacher zum Fachinformatiker.">
   <meta property="og:locale" content="de_DE">
@@ -24,20 +24,56 @@
   <!-- Google Search console link  -->
    <meta name="google-site-verification" content="ux9BqTNVNy7rfch74VKri6tPbtkXxg8vPuUoNjsG25Q" />
 
-  <!-- Favicon: inline SVG monogram in accent orange -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23121821'/%3E%3Ctext x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='32' font-weight='700' fill='%23ff8a3d'%3EIK%3C/text%3E%3C/svg%3E">
+  <!-- Favicon: geometric fox mark -->
+  <link rel="icon" type="image/png" href="assets/logo-small.png">
+  <link rel="apple-touch-icon" href="assets/logo-small.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Structured data: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ivan Krznaric-Bertic",
+    "url": "https://ivankrz.github.io/",
+    "jobTitle": "Fachinformatiker Systemintegration (in Umschulung)",
+    "email": "mailto:Ivan_KB@web.de",
+    "sameAs": [
+      "https://github.com/IvanKRZ",
+      "https://linkedin.com/in/ivan-krznaric-bertic"
+    ],
+    "knowsAbout": [
+      "Linux",
+      "Proxmox",
+      "Homelab",
+      "Bash",
+      "Python",
+      "PowerShell",
+      "Wazuh",
+      "Grafana",
+      "Prometheus",
+      "Tailscale",
+      "Nextcloud",
+      "KI-Workflows"
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Zum Inhalt springen</a>
+
   <div class="container">
 
     <!-- ── Header ── -->
     <header>
+      <img class="hero-logo" src="assets/logo-big.png"
+           alt="Logo von Ivan Krznaric-Bertic — geometrischer Fuchskopf" width="173" height="184">
+
       <div class="hero-inner">
         <div class="badge hero-anim">
           <span class="badge-dot"></span>
@@ -75,7 +111,7 @@
     </header>
 
     <!-- ── About ── -->
-    <section aria-labelledby="about-heading">
+    <section id="main" aria-labelledby="about-heading" tabindex="-1">
       <h2 id="about-heading" class="visually-hidden">Über mich</h2>
       <div class="section-label" aria-hidden="true">// über mich</div>
       <div class="about-text reveal">
@@ -146,11 +182,12 @@
       <div class="section-label" aria-hidden="true">// skills &amp; tools</div>
       <div class="skill-groups reveal">
         <div class="skill-group">
-          <div class="skill-group-label">// Betriebssysteme</div>
+          <div class="skill-group-label">// betriebssysteme &amp; self-hosting</div>
           <div class="skill-tags">
             <span class="skill-tag">Windows</span>
             <span class="skill-tag">Linux</span>
             <span class="skill-tag">Proxmox</span>
+            <span class="skill-tag">Nextcloud</span>
           </div>
         </div>
         <div class="skill-group">
