@@ -131,31 +131,6 @@ header {
   position: relative;
 }
 
-/* Logo — oben im Header, etwa auf halber Höhe zwischen
-   Seitenanfang und dem mittig zentrierten Hero-Inhalt */
-.hero-logo {
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(103px, 15.84vw, 173px);
-  height: auto;
-  pointer-events: none;
-  user-select: none;
-  opacity: 0;
-  animation: heroLogoIn 0.7s ease 0.1s forwards;
-}
-@keyframes heroLogoIn { to { opacity: 0.4; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-logo { animation: none; opacity: 0.4; }
-}
-
-/* Bei niedrigen Viewports (Logo würde mit dem Hero kollidieren) ausblenden */
-@media (max-height: 640px) {
-  .hero-logo { display: none; }
-}
-
 .badge {
   display: inline-flex;
   align-items: center;
