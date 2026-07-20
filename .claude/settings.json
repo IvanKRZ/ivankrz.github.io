@@ -7,7 +7,8 @@
       "Bash(cp \"C:/Users/Ivan/Nextcloud/Design System/Logo/Logo Small.png\" \"assets/logo-small.png\")",
       "Bash(cp \"C:/Users/Ivan/Nextcloud/Design System/Logo/Logo Big.png\" \"assets/logo-big.png\")",
       "Bash(node -e ' *)",
-      "PowerShell(Get-NetTCPConnection -LocalPort 8765 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; \"Port 8765 freigegeben\")"
+      "PowerShell(Get-NetTCPConnection -LocalPort 8765 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; \"Port 8765 freigegeben\")",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\Ivan\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Ivan-Nextcloud-Projekte-GitHub-ivankrz-github-io\\\\f453244f-e7d1-442a-b2b6-fba14c6ded01\\\\scratchpad\\\\sidebar-tuning.html\")"
     ]
   }
 }
