@@ -71,12 +71,16 @@
 .skip-link:focus { transform: translate(-50%, 0); outline: none; }
 #main:focus { outline: none; }
 
-html { scroll-behavior: smooth; }
+/* Root-Schriftgröße wächst erst oberhalb von 1920px Viewport-Breite mit:
+   16px bis 1080p (unverändert), ~17.7px auf 1440p, gedeckelt bei 21px auf 4K.
+   Der Rest des Stylesheets rechnet in rem und skaliert dadurch proportional mit.
+   rem statt px in der clamp(), damit die Browser-Schriftgrößen-Einstellung greift. */
+html { scroll-behavior: smooth; font-size: clamp(1rem, 0.6875rem + 0.26vw, 1.3125rem); }
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.7;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -109,11 +113,11 @@ a { color: var(--accent); text-decoration: none; }
 .shell {
   position: relative;
   z-index: 1;
-  max-width: 1120px;
+  max-width: 70rem;
   margin: 0 auto;
   padding: 0 2.5rem;
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 20rem 1fr;
   gap: 3.5rem;
 }
 
@@ -130,7 +134,7 @@ a { color: var(--accent); text-decoration: none; }
   padding: 3.5rem 0;
 }
 .brand { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.75rem; margin-bottom: 2.1rem; }
-.brand img { width: 34px; height: 34px; border-radius: 7px; }
+.brand img { width: 2.125rem; height: 2.125rem; border-radius: 7px; }
 .brand-mono { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 .side-name { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 0.5rem; color: var(--text); }
 .side-role { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.5rem; }
@@ -157,10 +161,10 @@ a { color: var(--accent); text-decoration: none; }
   padding: 0.45rem 0;
   transition: color 0.25s;
 }
-.side-nav .bar { width: 26px; height: 1px; background: var(--border-hi); transition: width 0.3s, background 0.3s; }
+.side-nav .bar { width: 1.625rem; height: 1px; background: var(--border-hi); transition: width 0.3s, background 0.3s; }
 .side-nav a:hover { color: var(--text-dim); }
 .side-nav a.active { color: var(--text); }
-.side-nav a.active .bar { width: 46px; background: var(--accent); }
+.side-nav a.active .bar { width: 2.875rem; background: var(--accent); }
 
 .side-links { display: flex; gap: 0.55rem; flex-wrap: wrap; margin-top: 2rem; }
 .side-links a, .side-links button {
@@ -228,7 +232,7 @@ a { color: var(--accent); text-decoration: none; }
 }
 
 /* ── Content ── */
-.content { padding: 5rem 0 clamp(6rem, 28vh, 18rem); max-width: 660px; }
+.content { padding: 5rem 0 clamp(6rem, 28vh, 18rem); max-width: 41.25rem; }
 .block { padding-bottom: 5.5rem; scroll-margin-top: 2rem; }
 #about { padding-bottom: 9rem; scroll-margin-top: 6rem; }
 #work { padding-bottom: 9rem; }
@@ -352,7 +356,7 @@ a { color: var(--accent); text-decoration: none; }
 .svc { display: flex; flex-direction: column; gap: 0.15rem; }
 .svc-row { display: flex; align-items: center; gap: 0.65rem; font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); padding: 0.28rem 0; transition: color 0.18s; }
 .svc-row:hover { color: var(--accent); }
-.svc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); flex-shrink: 0; opacity: 0.85; }
+.svc-dot { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); flex-shrink: 0; opacity: 0.85; }
 .svc-row:hover .svc-dot { background: var(--accent); box-shadow: 0 0 7px var(--accent); }
 
 /* Announcement box — headline + status line + contact links, lives in the sticky sidebar */
@@ -386,19 +390,21 @@ a { color: var(--accent); text-decoration: none; }
   text-transform: uppercase;
   color: var(--green);
 }
-.announcement-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 7px oklch(0.72 0.17 145 / 0.7); animation: pulse 2.4s ease-in-out infinite; }
+.announcement-eyebrow::before { content: ''; width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 7px oklch(0.72 0.17 145 / 0.7); animation: pulse 2.4s ease-in-out infinite; }
 .announcement-title { font-size: 0.9rem; font-weight: 600; letter-spacing: -0.005em; line-height: 1.4; color: var(--text); }
 .announcement-title .hl { color: var(--accent); }
 .announcement .side-links { margin-top: 0.3rem; gap: 0.4rem; flex-wrap: nowrap; }
 .announcement .side-links a, .announcement .side-links button { background: var(--bg3); border-color: var(--border-hi); padding: 0.5rem 0.6rem; font-size: 0.64rem; }
-.side-links svg { flex-shrink: 0; }
+/* überschreibt die width/height-Attribute im HTML — sonst blieben die Icons
+   bei 12px kleben, während die Schrift auf großen Displays mitwächst */
+.side-links svg { flex-shrink: 0; width: 1.15em; height: 1.15em; }
 
 footer {
   position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: min(1120px, 100vw);
+  width: min(70rem, 100vw);
   z-index: 5;
   font-family: var(--mono);
   font-size: 0.66rem;
