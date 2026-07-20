@@ -161,10 +161,24 @@ a { color: var(--accent); text-decoration: none; }
   padding: 0.45rem 0;
   transition: color 0.25s;
 }
-.side-nav .bar { width: 1.625rem; height: 1px; background: var(--border-hi); transition: width 0.3s, background 0.3s; }
+.side-nav .bar {
+  width: 1.625rem;
+  height: 1px;
+  border-radius: 1px;
+  background: var(--border-hi);
+  transition: width 0.3s, height 0.3s, background 0.3s, box-shadow 0.3s;
+}
 .side-nav a:hover { color: var(--text-dim); }
-.side-nav a.active { color: var(--text); }
-.side-nav a.active .bar { width: 2.875rem; background: var(--accent); }
+.side-nav a:hover .bar { background: var(--muted); }
+/* Aktiver Abschnitt: Amber + 500er Schnitt + kräftigerer, leuchtender Balken.
+   IBM Plex Mono ist monospace — der Gewichtswechsel verschiebt nichts im Layout. */
+.side-nav a.active { color: var(--accent); font-weight: 500; }
+.side-nav a.active .bar {
+  width: 3.25rem;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
 
 .side-links { display: flex; gap: 0.55rem; flex-wrap: wrap; margin-top: 2rem; }
 .side-links a, .side-links button {
