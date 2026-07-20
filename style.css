@@ -269,22 +269,15 @@ a { color: var(--accent); text-decoration: none; }
 .prose strong { color: var(--text); font-weight: 600; }
 
 /* Stat bento row */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 2.2rem; }
-.stat {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.1rem 1rem;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.2s;
-}
-.stat::before { content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0; background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 55%); transition: opacity 0.3s; pointer-events: none; }
-.stat:hover { border-color: oklch(0.72 0.17 55 / 0.35); background: var(--bg3); transform: translateY(-3px); box-shadow: 0 12px 40px oklch(0.72 0.17 55 / 0.07); }
-.stat:hover::before { opacity: 0.6; }
-.stat-num { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; position: relative; }
-.stat-num .u { color: var(--accent); font-size: 1rem; }
-.stat-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 0.55rem; line-height: 1.3; position: relative; }
+/* Kennzahlen-Streifen statt Karten: die Werte sind nicht anklickbar und sollen
+   auch nicht so aussehen. Zusammengehalten werden sie von Trennlinien statt von
+   Rahmen — der erste Wert steht bündig zur Textkante darüber. */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 2.4rem; }
+.stat { padding: 0.15rem 1.15rem; border-left: 1px solid var(--border); }
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat-num { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+.stat-num .u { color: var(--accent); font-size: 1.15rem; }
+.stat-label { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 0.6rem; line-height: 1.3; }
 
 /* Work: featured case study */
 .featured {
@@ -484,7 +477,10 @@ footer {
   .side-nav { display: none; }
   .side-hook { min-height: auto; }
   .content { padding: 2rem 0 18vh; max-width: none; }
-  .stats { grid-template-columns: 1fr 1fr; }
+  /* Zweispaltig — jetzt beginnt jede zweite Zelle eine neue Reihe und muss
+     ihre Trennlinie verlieren, sonst hängt sie am linken Rand in der Luft. */
+  .stats { grid-template-columns: 1fr 1fr; row-gap: 1.6rem; }
+  .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
   .grid { grid-template-columns: 1fr; }
   .panels { grid-template-columns: 1fr; }
   .announcement { margin-top: 1.6rem; }
