@@ -1,4 +1,7 @@
-import { animate, createTimeline, stagger } from 'https://cdn.jsdelivr.net/npm/animejs@4.3.0/+esm';
+/*!
+ * © 2026 Ivan Krznaric-Bertic — https://ivankrz.github.io
+ * Vanilla JS, keine externen Abhängigkeiten.
+ */
 
 /* ── Console-Greeting für neugierige DevTools-Besucher ── */
 (() => {
@@ -17,174 +20,126 @@ import { animate, createTimeline, stagger } from 'https://cdn.jsdelivr.net/npm/a
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-document.addEventListener('DOMContentLoaded', () => {
-  /* ── Hero-Intro: badge → h1 → hook → links ── */
-  const heroTargets = document.querySelectorAll('.hero-anim');
-  if (heroTargets.length) {
-    if (reduceMotion) {
-      heroTargets.forEach(el => { el.style.opacity = '1'; });
-    } else {
-      createTimeline({ defaults: { ease: 'outExpo', duration: 700 } })
-        .add('.hero-anim', {
-          opacity: [0, 1],
-          translateY: [18, 0],
-          delay: stagger(120, { start: 100 }),
-        });
-    }
-  }
+/* ── Typewriter ──
+   Läuft in allen Modi — es ist Inhalt, keine Deko.
+   Der Cursor-Blink wird per CSS über prefers-reduced-motion abgeschaltet. */
+const PHRASES = [
+  { p: 'Werkzeugmacher → Fachinformatiker,', h: 'von der Werkstatt zum Homelab.' },
+  { p: 'Proxmox, Nextcloud, Tailscale,',      h: 'Infrastruktur im Eigenbau.' },
+  { p: 'Local LLMs, Claude Code,',            h: 'KI-Workflows, die ich selbst baue.' },
+  { p: 'Taucher, Gamer,',                     h: 'Nerd.' },
+];
 
-  /* ── Typewriter ── */
-  const PHRASES = [
-    { prefix: 'Werkzeugmacher → Fachinformatiker,', highlight: 'von der Werkstatt zum Homelab.' },
-    { prefix: 'Proxmox, Nextcloud, Tailscale,', highlight: 'Infrastruktur im Eigenbau.' },
-    { prefix: 'Local LLMs, Claude Code,', highlight: 'KI-Workflows, die ich selbst baue.' },
-    { prefix: 'Taucher, Gamer,', highlight: 'Nerd.' },
-  ];
+const hookEl = document.getElementById('hook');
+if (hookEl) {
+  let pi = 0, ci = 0, deleting = false;
+  const type = () => {
+    const { p, h } = PHRASES[pi];
+    const full = p + ' ' + h;
+    const pLen = p.length + 1;
+    ci += deleting ? -1 : 1;
+    ci = Math.max(0, Math.min(ci, full.length));
+    const shown = full.slice(0, ci);
+    hookEl.innerHTML = ci <= pLen ? shown : p + ' <span class="word">' + shown.slice(pLen) + '</span>';
+    if (!deleting && ci === full.length) { setTimeout(() => { deleting = true; type(); }, 2200); return; }
+    if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % PHRASES.length; setTimeout(type, 450); return; }
+    setTimeout(type, deleting ? 30 : 55);
+  };
+  setTimeout(type, 700);
+}
 
-  const textEl = document.getElementById('heroText');
-  const cursorEl = document.getElementById('heroCursor');
-  if (!textEl) return;
-
-  /* Typewriter runs in all modes — it's content, not decoration.
-     Cursor blink is handled in CSS via reduced-motion. */
-  let phraseIdx = 0, charIdx = 0, deleting = false;
-
-  function type() {
-    const { prefix, highlight } = PHRASES[phraseIdx];
-    const full = prefix + ' ' + highlight;
-    const pLen = prefix.length + 1;
-
-    if (!deleting) {
-      charIdx = Math.min(charIdx + 1, full.length);
-      const shown = full.slice(0, charIdx);
-      textEl.innerHTML = charIdx <= pLen
-        ? shown
-        : prefix + ' <span class="word">' + shown.slice(pLen) + '</span>';
-      if (charIdx === full.length) {
-        setTimeout(() => { deleting = true; type(); }, 2400);
-        return;
-      }
-      setTimeout(type, 60);
-    } else {
-      charIdx = Math.max(charIdx - 1, 0);
-      const shown = full.slice(0, charIdx);
-      textEl.innerHTML = charIdx <= pLen
-        ? shown
-        : prefix + ' <span class="word">' + shown.slice(pLen) + '</span>';
-      if (charIdx === 0) {
-        deleting = false;
-        phraseIdx = (phraseIdx + 1) % PHRASES.length;
-        setTimeout(type, 480);
-        return;
-      }
-      setTimeout(type, 35);
-    }
-  }
-  setTimeout(type, 900);
-
-  /* ── Hero parallax fade on scroll ── */
-  const heroInner = document.querySelector('.hero-inner');
-  const scrollHint = document.getElementById('scrollHint');
-  const headerEl = document.querySelector('header');
-  let cachedHeaderHeight = headerEl ? headerEl.offsetHeight : 0;
-  window.addEventListener('resize', () => {
-    if (headerEl) cachedHeaderHeight = headerEl.offsetHeight;
-  }, { passive: true });
-
-  let ticking = false;
-
-  function updateHero() {
-    const y = window.scrollY;
-    const progress = Math.min(y / (cachedHeaderHeight * 0.5), 1);
-    const opacity  = 1 - progress * progress;
-    if (heroInner) heroInner.style.opacity = opacity;
-    if (scrollHint) scrollHint.classList.toggle('hidden', y > 60);
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateHero);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  /* ── Scroll Reveal ── */
-  const revealObs = new IntersectionObserver(entries => {
+/* ── Scroll-Spy: aktiver Abschnitt markiert den passenden Sidebar-Link ── */
+const navLinks = [...document.querySelectorAll('.side-nav a')];
+if (navLinks.length) {
+  const spy = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      const el = e.target;
-      el.classList.add('visible');
-      revealObs.unobserve(el);
-
-      if (reduceMotion) {
-        el.querySelectorAll('.project, .skill-tag').forEach(c => { c.style.opacity = '1'; });
-        return;
-      }
-
-      if (el.classList.contains('reveal-children')) {
-        animate(el.querySelectorAll('.project'), {
-          opacity: [0, 1],
-          translateY: [40, 0],
-          duration: 700,
-          ease: 'outExpo',
-          delay: stagger(80),
-        });
-      }
+      navLinks.forEach(l => l.classList.toggle('active', l.dataset.t === e.target.id));
     });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  }, { rootMargin: '-20% 0px -60% 0px' });
+  document.querySelectorAll('.block').forEach(b => spy.observe(b));
+}
 
-  /* ── Skill-Tags: pro Gruppe gestaggert beim Sichtbarwerden ── */
-  const skillObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const tags = e.target.querySelectorAll('.skill-tag');
-      skillObs.unobserve(e.target);
+/* ── Scroll-Reveal ── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('vis');
+    revealObs.unobserve(e.target);
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-      if (reduceMotion) {
-        tags.forEach(t => { t.style.opacity = '1'; });
-        return;
-      }
-
-      animate(tags, {
-        opacity: [0, 1],
-        scale: [0.85, 1],
-        duration: 500,
-        ease: 'outBack',
-        delay: stagger(30),
-      });
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.skill-group').forEach(el => skillObs.observe(el));
-
-  /* ── Section Label Glow ── */
-  const labelObs = new IntersectionObserver(entries => {
-    entries.forEach(e => e.target.classList.toggle('lit', e.isIntersecting));
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.section-label').forEach(el => labelObs.observe(el));
-
-  /* ── Email kopieren ── */
-  const emailBtn = document.getElementById('emailBtn');
-  if (emailBtn) {
-    const showToast = (message) => {
-      if (emailBtn.querySelector('.copy-toast')) return;
-      const toast = document.createElement('span');
-      toast.className = 'copy-toast';
-      toast.textContent = message;
-      emailBtn.appendChild(toast);
-      setTimeout(() => toast.remove(), 2400);
+/* ── E-Mail kopieren ── */
+const emailBtn = document.getElementById('mail');
+const toast = document.getElementById('toast');
+if (emailBtn && toast) {
+  emailBtn.addEventListener('click', () => {
+    const email = 'Ivan_KB@web.de';
+    const show = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
     };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(() => show('Kopiert!')).catch(() => show('Manuell kopieren: ' + email));
+    } else {
+      show('Manuell kopieren: ' + email);
+    }
+  });
+}
 
-    emailBtn.addEventListener('click', () => {
-      const email = 'Ivan_KB@web.de';
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email)
-          .then(() => showToast('Kopiert!'))
-          .catch(() => showToast('Manuell kopieren: ' + email));
-      } else {
-        showToast('Manuell kopieren: ' + email);
-      }
+/* ── GitHub-Statistiken (dynamisch, mit statischem Fallback im HTML) ──
+   Ein Request auf /users/<user>/repos liefert Repo-Anzahl, Star-Summe
+   und die Sterne pro Projekt. Ergebnis wird 6 h in localStorage gecacht,
+   damit die Zahlen nicht bei jedem Aufruf neu laden oder „poppen“.
+   Schlägt der Abruf fehl, bleiben einfach die statischen Fallback-Werte. */
+(() => {
+  const USER = 'IvanKRZ';
+  const CACHE_KEY = 'gh-stats-v1';
+  const MAX_AGE = 6 * 60 * 60 * 1000; // 6 Stunden
+
+  const apply = (data) => {
+    if (!data) return;
+    const repoEl = document.getElementById('stat-repos');
+    const starEl = document.getElementById('stat-stars');
+    if (repoEl && Number.isFinite(data.repos)) repoEl.textContent = data.repos;
+    if (starEl && Number.isFinite(data.stars)) starEl.textContent = data.stars;
+    document.querySelectorAll('.star[data-repo]').forEach(el => {
+      const n = data.perRepo[el.dataset.repo.toLowerCase()];
+      if (typeof n !== 'number') return;
+      el.textContent = n > 0 ? '★ ' + n : '↗';
     });
-  }
-});
+  };
+
+  const readCache = () => {
+    try {
+      const c = JSON.parse(localStorage.getItem(CACHE_KEY));
+      if (c && (Date.now() - c.t) < MAX_AGE) return c.d;
+    } catch { /* ignore */ }
+    return null;
+  };
+
+  const fetchStats = async () => {
+    const res = await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&type=owner`, {
+      headers: { 'Accept': 'application/vnd.github+json' },
+    });
+    if (!res.ok) throw new Error('GitHub API ' + res.status);
+    const repos = await res.json();
+    const perRepo = {};
+    let stars = 0;
+    repos.forEach(r => { perRepo[r.name.toLowerCase()] = r.stargazers_count; stars += r.stargazers_count; });
+    return { repos: repos.length, stars, perRepo };
+  };
+
+  // Frischer Cache → sofort anwenden, kein API-Call (spart Rate-Limit, kein Nachladen).
+  const cached = readCache();
+  if (cached) { apply(cached); return; }
+
+  fetchStats()
+    .then(data => {
+      apply(data);
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: data })); } catch { /* ignore */ }
+    })
+    .catch(() => { /* Fallback-Werte im HTML bleiben stehen */ });
+})();

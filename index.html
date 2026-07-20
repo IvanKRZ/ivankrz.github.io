@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio von Ivan Krznaric-Bertic, Fachinformatiker Systemintegration mit Fokus auf Homelab, Linux, Security und KI-Workflows.">
+  <meta name="description" content="Portfolio von Ivan Krznaric-Bertic, Fachinformatiker Systemintegration mit Fokus auf Homelab, Linux, Security und KI-Workflows. Verfügbar für Praktika Feb–Jul 2027.">
   <meta name="author" content="Ivan Krznaric-Bertic">
   <link rel="canonical" href="https://ivankrz.github.io/">
   <meta name="copyright" content="© 2026 Ivan Krznaric-Bertic">
@@ -15,16 +15,22 @@
   <meta property="og:title" content="Ivan Krznaric-Bertic | Fachinformatiker Systemintegration">
   <meta property="og:description" content="Portfolio von Ivan Krznaric-Bertic — Homelab, Linux, Security und KI-Workflows. Vom Werkzeugmacher zum Fachinformatiker.">
   <meta property="og:locale" content="de_DE">
+  <meta property="og:image" content="https://ivankrz.github.io/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="Logo von Ivan Krznaric-Bertic — geometrischer Fuchs in Amber auf dunklem Grund">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ivan Krznaric-Bertic | Fachinformatiker Systemintegration">
   <meta name="twitter:description" content="Portfolio von Ivan Krznaric-Bertic — Homelab, Linux, Security und KI-Workflows.">
-  
-  <!-- Google Search console link  -->
-   <meta name="google-site-verification" content="ux9BqTNVNy7rfch74VKri6tPbtkXxg8vPuUoNjsG25Q" />
+  <meta name="twitter:image" content="https://ivankrz.github.io/assets/og-image.png">
 
-  <!-- Favicon: geometric fox mark -->
+  <!-- Google Search console link  -->
+  <meta name="google-site-verification" content="ux9BqTNVNy7rfch74VKri6tPbtkXxg8vPuUoNjsG25Q" />
+
+  <!-- Favicon: geometrischer Fuchs -->
   <link rel="icon" type="image/png" href="assets/logo-small.png">
   <link rel="apple-touch-icon" href="assets/logo-small.png">
 
@@ -43,6 +49,13 @@
     "url": "https://ivankrz.github.io/",
     "jobTitle": "Fachinformatiker Systemintegration (in Umschulung)",
     "email": "mailto:Ivan_KB@web.de",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pforzheim",
+      "addressRegion": "Baden-Württemberg",
+      "addressCountry": "DE"
+    },
+    "knowsLanguage": ["Deutsch", "Kroatisch", "Englisch"],
     "sameAs": [
       "https://github.com/IvanKRZ",
       "https://linkedin.com/in/ivan-krznaric-bertic"
@@ -67,176 +80,167 @@
 <body>
   <a href="#main" class="skip-link">Zum Inhalt springen</a>
 
-  <div class="container">
+  <div class="shell">
 
-    <!-- ── Header ── -->
-    <header>
-      <div class="hero-inner">
-        <div class="badge hero-anim">
-          <span class="badge-dot"></span>
-          Verfügbar für Praktika · 01.02.2027 – 30.07.2027
-        </div>
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="assets/logo-small.png" alt="" width="34" height="34">
+        <span class="brand-mono">Portfolio</span>
+      </div>
 
-        <h1 class="hero-anim">Ivan Krznaric-Bertic</h1>
+      <h1 class="side-name">Ivan<br>Krznaric-Bertic</h1>
+      <p class="side-role">Fachinformatiker Systemintegration</p>
+      <p class="side-meta">Raum Pforzheim · DE&nbsp;/&nbsp;HR&nbsp;/&nbsp;EN&nbsp;(B2)</p>
 
-        <p class="hero-hook hero-anim" id="heroHook" aria-live="polite">
-          <span id="heroText"></span><span class="hero-cursor" id="heroCursor"></span>
-        </p>
+      <p class="side-hook" aria-hidden="true"><span id="hook"></span><span class="cursor"></span></p>
 
-        <div class="hero-links hero-anim">
+      <nav class="side-nav" id="nav" aria-label="Abschnitte">
+        <a href="#about" data-t="about"><span class="bar" aria-hidden="true"></span>Über mich</a>
+        <a href="#work" data-t="work"><span class="bar" aria-hidden="true"></span>Projekte</a>
+        <a href="#skills" data-t="skills"><span class="bar" aria-hidden="true"></span>Skills</a>
+      </nav>
+
+      <div class="hire">
+        <p class="hire-eyebrow">Verfügbar · Feb – Jul 2027</p>
+        <p class="hire-title">Ich suche ein <span class="hl">Praktikum</span> in der Systemintegration.</p>
+        <div class="side-links">
           <a href="https://github.com/IvanKRZ" target="_blank" rel="noopener noreferrer">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-            IvanKRZ
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
           </a>
-          <span class="hero-links-sep"></span>
           <a href="https://linkedin.com/in/ivan-krznaric-bertic" target="_blank" rel="noopener noreferrer">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
-          <span class="hero-links-sep"></span>
-          <button class="copy-email-btn" id="emailBtn" aria-label="E-Mail kopieren">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            Ivan_KB@web.de
+          <button id="mail" type="button" aria-label="E-Mail-Adresse kopieren">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            E-Mail
           </button>
         </div>
       </div>
+    </aside>
 
-      <div class="scroll-hint" id="scrollHint" aria-hidden="true">
-        <div class="scroll-hint-line"></div>
-        <div class="scroll-hint-dot"></div>
-      </div>
-    </header>
+    <!-- ── Content ── -->
+    <main class="content" id="main">
 
-    <!-- ── About ── -->
-    <section id="main" aria-labelledby="about-heading" tabindex="-1">
-      <h2 id="about-heading" class="visually-hidden">Über mich</h2>
-      <div class="section-label" aria-hidden="true">// über mich</div>
-      <div class="about-text reveal">
-        <p>
-          Acht Jahre als <strong>Werkzeugmacher</strong> haben mir gezeigt, wie man Probleme wirklich löst: nicht nur schnell, sondern richtig. <strong>Präzision, Fehleranalyse, methodisches Denken</strong>. Das Handwerk war ein gutes Fundament. Irgendwann war das Kapitel trotzdem vorbei.
-        </p>
-        <p>
-          Die Affinität für IT war eigentlich immer da. Mit zwölf die Wartung des Familien-PCs, später die eigene Konsole gemoddet, um Zugriff auf noch mehr Spiele zu haben. Dann ein Raspberry Pi, der mit Pi-hole anfing und irgendwann mit Portainer, Grafana und Uptime Kuma lief, ohne vorher zu wissen, wo das hinführt.
-        </p>
-        <p>
-          2020 hat sich das geändert. Python, Virtualisierung, Netzwerke und irgendwann ein Homelab, das langsam ernster wird. Heute bin ich in der Umschulung zum <strong>Fachinformatiker Systemintegration</strong> und lerne endlich in einem Umfeld, das zu mir passt.
-        </p>
-        <p>
-          Wenn ich nicht am Rechner bin, bin ich am liebsten unter Wasser. Tauchen ist einer der wenigen Bereiche, in denen ich komplett abschalte. Meine zweite Leidenschaft ist Gaming. Mal entspannt online mit Freunden, mal ein anspruchsvolles Singleplayer-Game. Für jede Stimmung das Richtige.
-        </p>
-      </div>
-    </section>
+      <section id="about" class="block reveal" aria-labelledby="about-h">
+        <h2 id="about-h" class="eyebrow">über mich</h2>
+        <div class="prose">
+          <p>Acht Jahre als <strong>Werkzeugmacher</strong> haben mir gezeigt, wie man Probleme wirklich löst: nicht nur schnell, sondern richtig. <strong>Präzision, Fehleranalyse, methodisches Denken.</strong> Das Handwerk war ein gutes Fundament. Irgendwann war das Kapitel trotzdem vorbei.</p>
+          <p>Die Affinität für IT war eigentlich immer da. Mit zwölf die Wartung des Familien-PCs, später die eigene Konsole gemoddet, um Zugriff auf noch mehr Spiele zu haben. Dann ein Raspberry Pi, der mit Pi-hole anfing und irgendwann mit Portainer, Grafana und Uptime Kuma lief, ohne vorher zu wissen, wo das hinführt.</p>
+          <p>2020 hat sich das geändert. Python, Virtualisierung, Netzwerke und irgendwann ein Homelab, das langsam ernster wird. Heute bin ich in der Umschulung zum <strong>Fachinformatiker Systemintegration</strong> und lerne endlich in einem Umfeld, das zu mir passt.</p>
+          <p>Wenn ich nicht am Rechner bin, bin ich am liebsten unter Wasser. Tauchen ist einer der wenigen Bereiche, in denen ich komplett abschalte. Meine zweite Leidenschaft ist Gaming. Mal entspannt online mit Freunden, mal ein anspruchsvolles Singleplayer-Game. Für jede Stimmung das Richtige.</p>
+        </div>
 
-    <!-- ── Portfolio ── -->
-    <section aria-labelledby="portfolio-heading">
-      <h2 id="portfolio-heading" class="visually-hidden">Portfolio</h2>
-      <div class="section-label" aria-hidden="true">// portfolio</div>
-      <div class="projects reveal reveal-children">
-        <a href="https://github.com/IvanKRZ/wordpress-hosting-projekt" target="_blank" rel="noopener noreferrer" class="project">
-          <div>
-            <div class="project-name">wordpress-hosting-projekt</div>
-            <div class="project-desc">Self-Hosted WordPress-Stack für ein Vereins-Praxisprojekt: Docker Compose hinter Cloudflare Tunnel, kein einziger offener Port. Mit dokumentiertem Migrationsweg, Hardening-Checkliste und fünf Post-Mortems aus dem Betrieb.</div>
-            <div class="project-stack">
-              <span class="stack-chip">Proxmox</span>
-              <span class="stack-chip">Docker</span>
-              <span class="stack-chip">WordPress</span>
-              <span class="stack-chip">MariaDB</span>
-              <span class="stack-chip">Cloudflare Tunnel</span>
-            </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-num">8<span class="u"> Jahre</span></div>
+            <div class="stat-label">als<br>Werkzeugmacher</div>
           </div>
-          <div class="project-arrow" aria-hidden="true">↗</div>
-        </a>
-        <a href="https://github.com/IvanKRZ/homelab-scripts" target="_blank" rel="noopener noreferrer" class="project">
-          <div>
-            <div class="project-name">homelab-scripts</div>
-            <div class="project-desc">Bash- und Shell-Automatisierungen für eine selbst gehostete Homelab-Infrastruktur. Abdeckung: Proxmox-Verwaltung, Wazuh-SIEM-Setup und Tailscale-Netzwerk-Onboarding.</div>
-            <div class="project-stack">
-              <span class="stack-chip">Bash</span>
-              <span class="stack-chip">Shell</span>
-              <span class="stack-chip">Proxmox</span>
-              <span class="stack-chip">Wazuh</span>
-              <span class="stack-chip">Tailscale</span>
-            </div>
+          <div class="stat">
+            <div class="stat-num" id="stat-repos">7</div>
+            <div class="stat-label">Public<br>Repos</div>
           </div>
-          <div class="project-arrow" aria-hidden="true">↗</div>
-        </a>
-        <a href="https://github.com/IvanKRZ/LLM-Wiki-Template" target="_blank" rel="noopener noreferrer" class="project">
-          <div>
-            <div class="project-name">LLM-Wiki-Template</div>
-            <div class="project-desc">Wissensbasis im Karpathy-Stil — optimiert für die Arbeit mit Sprachmodellen. Obsidian als Frontend, Claude Code als Bearbeitungsschicht. Strukturierte Notizen, die ein LLM tatsächlich verarbeiten kann.</div>
-            <div class="project-stack">
-              <span class="stack-chip">Obsidian</span>
-              <span class="stack-chip">Claude Code</span>
-              <span class="stack-chip">Markdown</span>
-            </div>
+          <div class="stat">
+            <div class="stat-num"><span id="stat-stars">12</span><span class="u"> ★</span></div>
+            <div class="stat-label">GitHub<br>Stars</div>
           </div>
-          <div class="project-arrow" aria-hidden="true">↗</div>
-        </a>
-        <a href="https://github.com/IvanKRZ/claude-obsidian-maintenance" target="_blank" rel="noopener noreferrer" class="project">
-          <div>
-            <div class="project-name">claude-obsidian-maintenance</div>
-            <div class="project-desc">Token-effizienter Workflow zur Vault-Wartung: Duplikate erkennen, Links bereinigen, Struktur prüfen. Kombiniert Python-Analyse mit PowerShell-Automation.</div>
-            <div class="project-stack">
-              <span class="stack-chip">Python</span>
-              <span class="stack-chip">PowerShell</span>
-              <span class="stack-chip">Claude API</span>
-            </div>
-          </div>
-          <div class="project-arrow" aria-hidden="true">↗</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- ── Skills ── -->
-    <section aria-labelledby="skills-heading">
-      <h2 id="skills-heading" class="visually-hidden">Skills &amp; Tools</h2>
-      <div class="section-label" aria-hidden="true">// skills &amp; tools</div>
-      <div class="skill-groups reveal">
-        <div class="skill-group">
-          <div class="skill-group-label">// betriebssysteme &amp; self-hosting</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Windows</span>
-            <span class="skill-tag">Linux</span>
-            <span class="skill-tag">Proxmox</span>
-            <span class="skill-tag">Nextcloud</span>
+          <div class="stat">
+            <div class="stat-num">1</div>
+            <div class="stat-label">echtes<br>Kundenprojekt</div>
           </div>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">// scripting &amp; automatisierung</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Bash</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">PowerShell</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">// security &amp; monitoring</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Wazuh</span>
-            <span class="skill-tag">Grafana</span>
-            <span class="skill-tag">Prometheus</span>
-            <span class="skill-tag">Tailscale</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">// ki-workflows &amp; wissensmanagement</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Claude Code</span>
-            <span class="skill-tag">Obsidian</span>
-            <span class="skill-tag">Markdown</span>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
 
+      <section id="work" class="block reveal" aria-labelledby="work-h">
+        <h2 id="work-h" class="eyebrow">projekte</h2>
+
+        <a href="https://github.com/IvanKRZ/wordpress-hosting-projekt" target="_blank" rel="noopener noreferrer" class="featured">
+          <span class="feat-tag">★ Case Study · IHK-Praxisprojekt</span>
+          <h3 class="feat-title">wordpress-hosting-projekt</h3>
+          <p class="feat-desc">Self-Hosted WordPress-Stack für einen gemeinnützigen Sportverein — öffentlich erreichbar <strong>ohne einen einzigen offenen Port</strong>. Cloudflare Tunnel statt Portweiterleitung (kein Router-Zugriff), Managed-Migrationsweg für einen Betreiber ohne IT-Personal. Jede Architektur­entscheidung aus einer echten Randbedingung abgeleitet und IHK-konform dokumentiert.</p>
+          <div class="feat-metrics">
+            <div class="fm"><b>0</b><span>offene Ports</span></div>
+            <div class="fm"><b>4 Wo.</b><span>Projektlaufzeit</span></div>
+            <div class="fm"><b>3</b><span>Personen-Team</span></div>
+            <div class="fm"><b>5</b><span>Post-Mortems</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip">Proxmox</span><span class="chip">Docker Compose</span><span class="chip">Cloudflare Tunnel</span><span class="chip">WordPress</span><span class="chip">MariaDB</span>
+          </div>
+        </a>
+
+        <div class="grid">
+          <a href="https://github.com/IvanKRZ/LLM-Wiki-Template" target="_blank" rel="noopener noreferrer" class="card">
+            <div class="card-top"><h3 class="card-name">LLM-Wiki-Template</h3><span class="star" data-repo="LLM-Wiki-Template">★ 7</span></div>
+            <p class="card-desc">Karpathy-Stil-Wissensbasis, maschinenlesbar per Design. Stateful statt RAG, Widersprüche werden erkannt und markiert.</p>
+            <div class="chips"><span class="chip">Obsidian</span><span class="chip">Claude Code</span><span class="chip">Markdown</span></div>
+          </a>
+          <a href="https://github.com/IvanKRZ/homelab-scripts" target="_blank" rel="noopener noreferrer" class="card">
+            <div class="card-top"><h3 class="card-name">homelab-scripts</h3><span class="star" data-repo="homelab-scripts">★ 1</span></div>
+            <p class="card-desc">Interaktive Bash-Automatisierung für Proxmox, Wazuh-SIEM und Tailscale-Onboarding. Keine hardcoded Credentials.</p>
+            <div class="chips"><span class="chip">Bash</span><span class="chip">Proxmox</span><span class="chip">Wazuh</span></div>
+          </a>
+          <a href="https://github.com/IvanKRZ/projekt-tmh-neulingen" target="_blank" rel="noopener noreferrer" class="card">
+            <div class="card-top"><h3 class="card-name">projekt-tmh-neulingen</h3><span class="star" data-repo="projekt-tmh-neulingen">↗</span></div>
+            <p class="card-desc">Das Custom-WordPress-Theme zum Case-Study-Projekt: eigene Templates für Kalender, Galerie, Training &amp; Kontakt.</p>
+            <div class="chips"><span class="chip">PHP</span><span class="chip">WordPress</span><span class="chip">Theme-Dev</span></div>
+          </a>
+          <a href="https://github.com/IvanKRZ/claude-obsidian-maintenance" target="_blank" rel="noopener noreferrer" class="card">
+            <div class="card-top"><h3 class="card-name">claude-obsidian-maintenance</h3><span class="star" data-repo="claude-obsidian-maintenance">★ 3</span></div>
+            <p class="card-desc">Token-effizienter Vault-Wartungs-Workflow: Duplikate, Links &amp; Struktur prüfen. Python-Analyse + PowerShell.</p>
+            <div class="chips"><span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">Claude API</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section id="skills" class="block reveal" aria-labelledby="skills-h">
+        <h2 id="skills-h" class="eyebrow">skills &amp; tools</h2>
+        <div class="panels">
+          <div class="panel">
+            <div class="panel-head"><h3 class="panel-title">OS &amp; Self-Hosting</h3><span class="panel-status">active</span></div>
+            <div class="svc">
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Linux</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Windows</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Proxmox</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Nextcloud</div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3 class="panel-title">Scripting &amp; Automatisierung</h3><span class="panel-status">active</span></div>
+            <div class="svc">
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Bash</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Python</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>PowerShell</div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3 class="panel-title">Security &amp; Monitoring</h3><span class="panel-status">active</span></div>
+            <div class="svc">
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Wazuh</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Grafana</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Prometheus</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Tailscale</div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3 class="panel-title">KI-Workflows &amp; Wissen</h3><span class="panel-status">active</span></div>
+            <div class="svc">
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Claude Code</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Obsidian</div>
+              <div class="svc-row"><span class="svc-dot" aria-hidden="true"></span>Markdown</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>© 2026 Ivan Krznaric-Bertic</footer>
+
+    </main>
   </div>
 
-  <!-- ── Footer ── -->
-  <footer>
-    <div class="container footer-inner">
-      <span>© 2026 Ivan Krznaric-Bertic</span>
-    </div>
-  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite">Kopiert!</div>
 
   <script type="module" src="main.js"></script>
 </body>
