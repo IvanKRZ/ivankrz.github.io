@@ -46,16 +46,38 @@ if (hookEl) {
   setTimeout(type, 700);
 }
 
-/* ── Scroll-Spy: aktiver Abschnitt markiert den passenden Sidebar-Link ── */
+/* ── Scroll-Spy: aktiver Abschnitt markiert den passenden Sidebar-Link ──
+   Positionsbasiert statt IntersectionObserver: aktiv ist der letzte Abschnitt,
+   dessen Oberkante die Referenzlinie bei 35 % Viewport-Höhe passiert hat.
+   Der IO-Ansatz davor hat Abschnitte übersprungen — bei mehreren Einträgen in
+   einem Callback-Batch gewann schlicht der letzte, und dessen Reihenfolge ist
+   nicht spezifiziert. Hier gibt es pro Frame genau ein eindeutiges Ergebnis. */
 const navLinks = [...document.querySelectorAll('.side-nav a')];
-if (navLinks.length) {
-  const spy = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      navLinks.forEach(l => l.classList.toggle('active', l.dataset.t === e.target.id));
-    });
-  }, { rootMargin: '-20% 0px -60% 0px' });
-  document.querySelectorAll('.block').forEach(b => spy.observe(b));
+const blocks = [...document.querySelectorAll('.block')];
+if (navLinks.length && blocks.length) {
+  const LINE = 0.35;
+  let queued = false;
+
+  const sync = () => {
+    queued = false;
+    const line = window.innerHeight * LINE;
+    // Vor dem ersten Abschnitt bleibt dieser aktiv, statt gar nichts zu markieren.
+    let current = blocks[0];
+    for (const b of blocks) {
+      if (b.getBoundingClientRect().top <= line) current = b;
+    }
+    navLinks.forEach(l => l.classList.toggle('active', l.dataset.t === current.id));
+  };
+
+  const schedule = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(sync);
+  };
+
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule, { passive: true });
+  sync();
 }
 
 /* ── E-Mail kopieren ── */
