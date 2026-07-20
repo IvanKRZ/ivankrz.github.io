@@ -80,6 +80,69 @@ if (navLinks.length && blocks.length) {
   sync();
 }
 
+/* ── Weicher Sprung zu den Abschnitten ──
+   Übernimmt das Anker-Scrolling der Nav-Links, weil CSS' scroll-behavior weder
+   Dauer noch Easing steuerbar macht. Bei prefers-reduced-motion greifen wir gar
+   nicht ein — dort bleibt der harte Sprung, und das ist dort auch gewollt. */
+// ease-in-out-quart: sanfter Anlauf, lange weiche Ausschwingphase.
+// Quart statt Cubic, weil der flachere Ein- und Ausstieg den Übergang
+// spürbar seidiger macht — der Start „ruckt" nicht an.
+const SCROLL_EASE = t => (t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2);
+const SCROLL_MIN = 500;   // ms — kurze Distanzen sollen nicht zäh wirken
+const SCROLL_MAX = 1200;  // ms — lange Distanzen nicht endlos
+const SCROLL_PACE = 0.55; // ms pro Pixel zwischen den beiden Grenzen
+
+let abortGlide = null; // bricht eine noch laufende Animation ab (Doppelklick)
+
+const glideTo = (target) => {
+  abortGlide?.();
+  // scroll-margin-top aus dem CSS übernehmen, damit die Landeposition
+  // exakt der des nativen Anker-Sprungs entspricht (#about hat 6rem).
+  const offset = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+  const maxY = document.documentElement.scrollHeight - window.innerHeight;
+  const from = window.scrollY;
+  const to = Math.min(Math.max(0, from + target.getBoundingClientRect().top - offset), maxY);
+  const distance = to - from;
+  if (!distance) return;
+
+  const duration = Math.min(SCROLL_MAX, Math.max(SCROLL_MIN, Math.abs(distance) * SCROLL_PACE));
+  const start = performance.now();
+
+  // Ohne das würde das smooth aus dem CSS jeden Einzelschritt nochmal glätten.
+  const root = document.documentElement;
+  root.style.scrollBehavior = 'auto';
+
+  const ac = new AbortController();
+  let cancelled = false;
+  const finish = () => { root.style.scrollBehavior = ''; ac.abort(); abortGlide = null; };
+  // Scrollt der Nutzer selbst, gewinnt er — wir brechen sofort ab.
+  const cancel = () => { cancelled = true; finish(); };
+  abortGlide = cancel;
+  addEventListener('wheel', cancel, { passive: true, signal: ac.signal });
+  addEventListener('touchstart', cancel, { passive: true, signal: ac.signal });
+
+  const step = (now) => {
+    if (cancelled) return;
+    const t = Math.min(1, (now - start) / duration);
+    scrollTo(0, from + distance * SCROLL_EASE(t));
+    if (t < 1) requestAnimationFrame(step);
+    else finish();
+  };
+  requestAnimationFrame(step);
+};
+
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    const hash = link.getAttribute('href');
+    const target = document.querySelector(hash);
+    // Kein Ziel oder Bewegungsreduktion aktiv → nativ scrollen lassen.
+    if (!target || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    glideTo(target);
+    history.pushState(null, '', hash);
+  });
+});
+
 /* ── E-Mail kopieren ── */
 const emailBtn = document.getElementById('mail');
 const toast = document.getElementById('toast');
