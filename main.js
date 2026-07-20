@@ -18,8 +18,6 @@
   console.log('%c> mail: Ivan_KB@web.de', dim);
 })();
 
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 /* ── Typewriter ──
    Läuft in allen Modi — es ist Inhalt, keine Deko.
    Der Cursor-Blink wird per CSS über prefers-reduced-motion abgeschaltet. */
@@ -59,16 +57,6 @@ if (navLinks.length) {
   }, { rootMargin: '-20% 0px -60% 0px' });
   document.querySelectorAll('.block').forEach(b => spy.observe(b));
 }
-
-/* ── Scroll-Reveal ── */
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('vis');
-    revealObs.unobserve(e.target);
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 /* ── E-Mail kopieren ── */
 const emailBtn = document.getElementById('mail');

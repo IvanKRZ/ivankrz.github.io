@@ -364,9 +364,25 @@ footer {
   pointer-events: none;
 }
 
-/* ── Scroll reveal ── */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.reveal.vis { opacity: 1; transform: none; }
+/* ── Scroll-gekoppeltes Ein-/Ausblenden der Bereiche ──
+   Jede Sektion wird über ihre eigene Sichtbarkeits-Progression sanft
+   ein- und ausgeblendet: gedimmt beim Ein-/Austreten, voll in der Mitte.
+   Läuft nur in Browsern mit Scroll-Timeline-Support (Chromium/Edge, aktuelle
+   Safari/Firefox); sonst bleiben die Bereiche einfach voll sichtbar. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .content > section {
+      animation: section-fade linear both;
+      animation-timeline: view();
+    }
+  }
+}
+@keyframes section-fade {
+  0%   { opacity: 0.4; }
+  18%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
 
 .toast {
   position: fixed;
@@ -401,7 +417,6 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
   .cursor, .hire-eyebrow::before { animation: none; }
   html { scroll-behavior: auto; }
 }
