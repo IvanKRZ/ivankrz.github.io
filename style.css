@@ -185,6 +185,48 @@ a { color: var(--accent); text-decoration: none; }
   transform: translateY(-1px);
 }
 
+/* Tooltip für E-Mail-Button */
+#mail {
+  position: relative;
+}
+#mail::after {
+  content: 'Ivan_KB@web.de';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.6rem;
+  background: var(--bg3);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+#mail::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% - 0.3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--bg3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+#mail:hover::after,
+#mail:hover::before {
+  opacity: 1;
+}
+
 /* ── Content ── */
 .content { padding: 5rem 0 clamp(6rem, 28vh, 18rem); max-width: 660px; }
 .block { padding-bottom: 5.5rem; scroll-margin-top: 2rem; }
